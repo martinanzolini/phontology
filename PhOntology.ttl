@@ -1,0 +1,1106 @@
+@prefix : <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pho: <http://www.semanticweb.org/martina/ontologies/2020/PhOntology> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix vann: <http://purl.org/vocab/vann/vann:> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix bibframe: <http://id.loc.gov/ontologies/bibframe/> .
+@prefix PhOntology: <http://www.semanticweb.org/martina/ontologies/2020/PhOntology/> .
+@prefix phontology: <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#> .
+@prefix cpannotationschema: <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl#> .
+@base <http://www.semanticweb.org/martina/ontologies/2020/PhOntology> .
+
+<http://www.semanticweb.org/martina/ontologies/2020/PhOntology> rdf:type owl:Ontology ;
+                                                                 owl:imports <http://www.ontologydesignpatterns.org/cp/owl/partof.owl> ,
+                                                                             <http://www.ontologydesignpatterns.org/cp/owl/place.owl> ;
+                                                                 dc:creator "Martina Anzolini"@en ;
+                                                                 dc:date "Luglio 2020"@en ;
+                                                                 dc:description "Ontology that describes a partial world of photography"@en ;
+                                                                 dc:title "Photo Ontology"@en ;
+                                                                 vann:preferredNamespacePrefix "pho"@en ;
+                                                                 vann:preferredNamespaceUri "http://www.semanticweb.org/martina/ontologies/2020/PhOntology"@en ;
+                                                                 rdfs:label "PhOntology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+dc:date rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/vann:preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/vann:preferredNamespaceUri
+vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+swrla:isRuleEnabled rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#equivalentClass
+owl:equivalentClass rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#altLabel
+<http://www.w3.org/2004/02/skos/core#altLabel> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#broader
+<http://www.w3.org/2004/02/skos/core#broader> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> rdf:type owl:ObjectProperty ;
+                                                                              rdfs:domain <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
+                                                                              rdfs:range owl:Thing ;
+                                                                              rdfs:isDefinedBy "http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl"@en ;
+                                                                              rdfs:label "has member"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Contains_public_photo
+phontology:Contains_public_photo rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
+                                 rdfs:domain phontology:Reportage ;
+                                 rdfs:range phontology:Photo ;
+                                 rdfs:label "contains public photo"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Is_Contained
+phontology:Is_Contained rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf phontology:is_member_of ;
+                        rdfs:label "is contained"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasBrand
+phontology:hasBrand rdf:type owl:ObjectProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( phontology:Lens
+                                                phontology:Photocamera
+                                              )
+                                ] ;
+                    rdfs:range phontology:Brand ;
+                    rdfs:comment "brand about subject"@en ;
+                    rdfs:label "has brand"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasCollaboratedWith
+phontology:hasCollaboratedWith rdf:type owl:ObjectProperty ,
+                                        owl:SymmetricProperty ,
+                                        owl:TransitiveProperty ;
+                               rdfs:domain phontology:Person ;
+                               rdfs:range phontology:Person ;
+                               rdfs:label "has collaborated with"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasLens
+phontology:hasLens rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#hasPart> ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain phontology:Photocamera ;
+                   rdfs:range phontology:Lens ;
+                   rdfs:label "has lens"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasMainCharacter
+phontology:hasMainCharacter rdf:type owl:ObjectProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:domain phontology:Photo ;
+                            rdfs:range phontology:Person ;
+                            rdfs:label "has main character"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasOwnCamera
+phontology:hasOwnCamera rdf:type owl:ObjectProperty ;
+                        rdfs:domain phontology:Person ;
+                        rdfs:range phontology:Photocamera ;
+                        owl:propertyChainAxiom ( PhOntology:hasTookPhoto
+                                                 phontology:isRealizedWith
+                                               ) ;
+                        rdfs:label "has own camera"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasPartOfCamera
+phontology:hasPartOfCamera rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#hasPart> ;
+                           rdf:type owl:TransitiveProperty ;
+                           rdfs:domain phontology:Photocamera ;
+                           rdfs:range phontology:PhotocameraComponent ;
+                           rdfs:label "has part of camera"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasPhoto
+phontology:hasPhoto rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
+                    rdfs:domain phontology:Album ;
+                    rdfs:range phontology:Photo ;
+                    rdfs:label "has photo"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasPlace
+phontology:hasPlace rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#hasLocation> ;
+                    rdf:type owl:TransitiveProperty ;
+                    rdfs:domain phontology:Photo ;
+                    rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ;
+                    rdfs:label "has place"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasRealizationDetail
+phontology:hasRealizationDetail rdf:type owl:ObjectProperty ;
+                                owl:propertyChainAxiom ( phontology:isRealizedWith
+                                                         phontology:hasLens
+                                                       ) ;
+                                rdfs:label "has realization details"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasShutter
+phontology:hasShutter rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#hasPart> ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain phontology:Photocamera ;
+                      rdfs:range phontology:Shutter ;
+                      rdfs:label "has shutter"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasSupport
+phontology:hasSupport rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#hasPart> ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain phontology:Photocamera ;
+                      rdfs:range phontology:SupportType ;
+                      rdfs:label "has support"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#has_taken_in_city
+phontology:has_taken_in_city rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf phontology:hasPlace ;
+                             rdfs:domain phontology:Photo ;
+                             rdfs:range phontology:City ;
+                             rdfs:label "has taken in city"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#has_taken_in_country
+phontology:has_taken_in_country rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#hasLocation> ;
+                                rdfs:domain phontology:Photo ;
+                                rdfs:range phontology:Country ;
+                                rdfs:label "has taken in country"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#isPartOfCamera
+phontology:isPartOfCamera rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#isPartOf> ;
+                          rdfs:domain phontology:PhotocameraComponent ;
+                          rdfs:range phontology:Photocamera ;
+                          rdfs:label "is part of photocamera"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#isPublished
+phontology:isPublished rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf phontology:is_member_of ;
+                       rdf:type owl:TransitiveProperty ;
+                       rdfs:domain phontology:Photo ;
+                       rdfs:range phontology:Reportage ;
+                       rdfs:label "is published"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#isRealizedWith
+phontology:isRealizedWith rdf:type owl:ObjectProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain phontology:Photo ;
+                          rdfs:range phontology:Photocamera ;
+                          rdfs:label "is realized with"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#is_member_of
+phontology:is_member_of rdf:type owl:ObjectProperty ;
+                        rdfs:domain owl:Thing ;
+                        rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
+                        rdfs:label "is member of"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#is_realized_by
+phontology:is_realized_by rdf:type owl:ObjectProperty ;
+                          owl:inverseOf PhOntology:hasTookPhoto ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain phontology:Photo ;
+                          rdfs:range phontology:Person ;
+                          rdfs:label "is realized by"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology/hasTookPhoto
+PhOntology:hasTookPhoto rdf:type owl:ObjectProperty ,
+                                 owl:AsymmetricProperty ;
+                        rdfs:domain phontology:Person ;
+                        rdfs:range phontology:Photo ;
+                        rdfs:label "has took photo"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Mirror
+phontology:Mirror rdf:type owl:DatatypeProperty ;
+                  rdfs:domain phontology:Photocamera ;
+                  rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#PhotoDate
+phontology:PhotoDate rdf:type owl:DatatypeProperty ;
+                     rdfs:domain phontology:Photo ;
+                     rdfs:range xsd:dateTime ;
+                     rdfs:label "Photo Date"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#cameraType
+phontology:cameraType rdf:type owl:DatatypeProperty ;
+                      rdfs:domain phontology:Photocamera ;
+                      rdfs:range [ rdf:type rdfs:Datatype ;
+                                   owl:oneOf [ rdf:type rdf:List ;
+                                               rdf:first "Analogical" ;
+                                               rdf:rest [ rdf:type rdf:List ;
+                                                          rdf:first "Digital" ;
+                                                          rdf:rest rdf:nil
+                                                        ]
+                                             ]
+                                 ] ;
+                      rdfs:label "Camera Type"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#focalLenght
+phontology:focalLenght rdf:type owl:DatatypeProperty ;
+                       rdfs:domain phontology:Lens ;
+                       rdfs:range xsd:short ;
+                       rdfs:label "Focal Lenght"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#photoColorType
+phontology:photoColorType rdf:type owl:DatatypeProperty ;
+                          rdfs:domain phontology:Photo ;
+                          rdfs:range [ rdf:type rdfs:Datatype ;
+                                       owl:oneOf [ rdf:type rdf:List ;
+                                                   rdf:first "B/W" ;
+                                                   rdf:rest [ rdf:type rdf:List ;
+                                                              rdf:first "Color" ;
+                                                              rdf:rest [ rdf:type rdf:List ;
+                                                                         rdf:first "Neon" ;
+                                                                         rdf:rest [ rdf:type rdf:List ;
+                                                                                    rdf:first "Sepia" ;
+                                                                                    rdf:rest rdf:nil
+                                                                                  ]
+                                                                       ]
+                                                            ]
+                                                 ]
+                                     ] ;
+                          rdfs:label "Photo Color Type"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology/photoTitle
+PhOntology:photoTitle rdf:type owl:DatatypeProperty ;
+                      rdfs:domain phontology:Photo ;
+                      rdfs:range xsd:string ;
+                      rdfs:label "Photo Title" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.org/Brand
+<http://schema.org/Brand> rdf:type owl:Class ;
+                          owl:equivalentClass phontology:Brand ;
+                          rdfs:comment "A brand is a name used by an organization or business person for labeling a product, product group, or similar."@en ;
+                          rdfs:isDefinedBy "https://schema.org/Brand"@en ;
+                          rdfs:label "Brand"@en .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> rdf:type owl:Class ;
+                                                                               rdfs:comment "A quantity of anything collected together into a mass"@en ;
+                                                                               rdfs:isDefinedBy "http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl" ;
+                                                                               rdfs:label "Collection"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Album
+phontology:Album rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty phontology:hasPhoto ;
+                                   owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                   owl:onClass phontology:Photo
+                                 ] ;
+                 rdfs:comment "A collection of personal photographs or other significative images that are arranged for viewing"@en ,
+                              "Raccoglie fotografie riprese in circostanze varie e in momenti particolarm. significativi della vita"@it ;
+                 rdfs:label "Album"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Brand
+phontology:Brand rdf:type owl:Class ;
+                 rdfs:comment "a name of an organization or business"@en ;
+                 rdfs:label "Brand"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#City
+phontology:City rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ;
+                rdfs:comment "A town of significant size and importance, center of population and culture"@en ;
+                rdfs:label "City"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Country
+phontology:Country rdf:type owl:Class ;
+                   rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ;
+                   rdfs:comment "Land, the territory of a nation or state"@en ;
+                   rdfs:label "Country"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Film
+phontology:Film rdf:type owl:Class ;
+                rdfs:subClassOf phontology:SupportType ;
+                rdfs:comment "A photographic material consisting of a base of celluloid covered with a photographic emulsion; used to make negatives or transparencies"@en ;
+                rdfs:label "Film"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#FisheyeLens
+phontology:FisheyeLens rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                             owl:onProperty phontology:focalLenght ;
+                                             owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                  owl:onDatatype xsd:short ;
+                                                                  owl:withRestrictions ( [ xsd:maxInclusive "15"^^xsd:short
+                                                                                         ]
+                                                                                       )
+                                                                ]
+                                           ] ;
+                       rdfs:subClassOf phontology:WideLens ;
+                       rdfs:label "Fisheye Lens"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Lens
+phontology:Lens rdf:type owl:Class ;
+                rdfs:subClassOf phontology:PhotocameraComponent ;
+                rdfs:comment "A device that is part of camera which focuses the image in a camera"@en ;
+                rdfs:label "Lens"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#MemoryCard
+phontology:MemoryCard rdf:type owl:Class ;
+                      rdfs:subClassOf phontology:SupportType ;
+                      rdfs:comment "A portable card that stores data in flash memory, often used in digital cameras"@en ;
+                      rdfs:label "Memory Card"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Mirrorless
+phontology:Mirrorless rdf:type owl:Class ;
+                      rdfs:subClassOf phontology:Photocamera ;
+                      rdfs:comment "Kind of camera, it's compact and smart, it hasn't any mirror inside"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Person
+phontology:Person rdf:type owl:Class ;
+                  owl:equivalentClass <http://xmlns.com/foaf/0.1/Person> ;
+                  rdfs:comment "A person"@en ;
+                  rdfs:label "Person"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Photo
+phontology:Photo rdf:type owl:Class ;
+                 rdfs:comment "A representation of a person or scene recorded by a camera"@en ;
+                 rdfs:label "Photo"@en ;
+                 owl:equivalentClass "https://schema.org/Photograph" ,
+                                     "https://www.wikidata.org/wiki/Q125191" ;
+                 <http://www.w3.org/2004/02/skos/core#broader> "http://purl.org/dc/dcmitype/Image" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Photocamera
+phontology:Photocamera rdf:type owl:Class ;
+                       rdfs:comment "A hand-held photographic device with an aperture controlled by a shutter that opens to admit light: focused by a lens, the light forms an image on a light-sensitive film or plate loaded through the back or top."@en ;
+                       rdfs:label "Photocamera"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#PhotocameraComponent
+phontology:PhotocameraComponent rdf:type owl:Class ;
+                                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                  owl:onProperty phontology:isPartOfCamera ;
+                                                  owl:someValuesFrom phontology:Photocamera
+                                                ] ;
+                                rdfs:comment "Equipment used by a photographer for taking photographs"@en ;
+                                rdfs:label "Photocamera Component"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Photographer
+phontology:Photographer rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty PhOntology:hasTookPhoto ;
+                                              owl:someValuesFrom [ owl:intersectionOf ( phontology:Photo
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty phontology:isPublished ;
+                                                                                          owl:someValuesFrom phontology:Reportage
+                                                                                        ]
+                                                                                      ) ;
+                                                                   rdf:type owl:Class
+                                                                 ]
+                                            ] ;
+                        rdfs:subClassOf phontology:Person ;
+                        rdfs:comment "A person who takes photographs, either as a job or hobby"@en ;
+                        rdfs:label "Photographer"@en ;
+                        owl:equivalentClass "https://www.wikidata.org/wiki/Q33231" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#PortraitPhoto
+phontology:PortraitPhoto rdf:type owl:Class ;
+                         rdfs:subClassOf phontology:Photo .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Reflex
+phontology:Reflex rdf:type owl:Class ;
+                  rdfs:subClassOf phontology:Photocamera ;
+                  rdfs:comment "Kind of camera, it has a mirror inside that reflect image"@en ;
+                  rdfs:label "Reflex"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Reportage
+phontology:Reportage rdf:type owl:Class ;
+                     rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
+                     rdfs:comment "Il servizio di un fotoreporter, fotocronaca"@it ,
+                                  "The reporting of news or information of general interest by fotoreporter"@en ;
+                     rdfs:label "Reportage"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Shutter
+phontology:Shutter rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Class ;
+                                         owl:oneOf ( phontology:Electronical
+                                                     phontology:Mechanical
+                                                   )
+                                       ] ;
+                   rdfs:subClassOf phontology:PhotocameraComponent ;
+                   rdfs:comment "A mechanical or electronical device on a camera that opens and closes to control the time of a photographic exposure"@en ;
+                   rdfs:label "Shutter"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#StandardLens
+phontology:StandardLens rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty phontology:focalLenght ;
+                                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                   owl:onDatatype xsd:short ;
+                                                                   owl:withRestrictions ( [ xsd:minInclusive "35"^^xsd:short
+                                                                                          ]
+                                                                                          [ xsd:maxExclusive "50"^^xsd:short
+                                                                                          ]
+                                                                                        )
+                                                                 ]
+                                            ] ;
+                        rdfs:subClassOf phontology:Lens ;
+                        rdfs:label "Standard Lens"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#SupportType
+phontology:SupportType rdf:type owl:Class ;
+                       rdfs:subClassOf phontology:PhotocameraComponent ;
+                       rdfs:comment "A type of camera storage"@en ;
+                       rdfs:label "Support Type"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#TeleLens
+phontology:TeleLens rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty phontology:focalLenght ;
+                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                               owl:onDatatype xsd:short ;
+                                                               owl:withRestrictions ( [ xsd:minInclusive "50"^^xsd:short
+                                                                                      ]
+                                                                                    )
+                                                             ]
+                                        ] ;
+                    rdfs:subClassOf phontology:Lens ;
+                    rdfs:label "Tele Lens"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#UrbanPhoto
+phontology:UrbanPhoto rdf:type owl:Class ;
+                      rdfs:subClassOf phontology:Photo .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#UrbanReportage
+phontology:UrbanReportage rdf:type owl:Class ;
+                          rdfs:subClassOf phontology:Reportage .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#WarPhoto
+phontology:WarPhoto rdf:type owl:Class ;
+                    rdfs:subClassOf phontology:Photo .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#WarReportage
+phontology:WarReportage rdf:type owl:Class ;
+                        rdfs:subClassOf phontology:Reportage .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#WideLens
+phontology:WideLens rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty phontology:focalLenght ;
+                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                               owl:onDatatype xsd:short ;
+                                                               owl:withRestrictions ( [ xsd:maxInclusive "35"^^xsd:short
+                                                                                      ]
+                                                                                    )
+                                                             ]
+                                        ] ;
+                    rdfs:subClassOf phontology:Lens ;
+                    rdfs:label "Wide Lens"@en .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> rdf:type owl:Class ;
+                                   rdfs:comment "A person."@en ;
+                                   rdfs:isDefinedBy "http://xmlns.com/foaf/0.1/"@en ;
+                                   rdfs:label "Person"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Canon
+phontology:Canon rdf:type owl:NamedIndividual ,
+                          phontology:Brand ;
+                 rdfs:label "Canon" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#CanonEos200D
+phontology:CanonEos200D rdf:type owl:NamedIndividual ,
+                                 phontology:Photocamera ;
+                        phontology:hasBrand phontology:Canon ;
+                        phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm> ;
+                        phontology:hasShutter phontology:Electronical ;
+                        phontology:Mirror "false"^^xsd:boolean ;
+                        rdfs:label "Canon EOS 200 D"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Carri_Armati
+phontology:Carri_Armati rdf:type owl:NamedIndividual ,
+                                 phontology:WarPhoto ;
+                        phontology:isPublished phontology:Reportage_dal_Fronte ;
+                        phontology:is_realized_by phontology:LeicaI ;
+                        rdfs:label "Carri Armati" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Cats
+phontology:Cats rdf:type owl:NamedIndividual ,
+                         phontology:Album .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Electronical
+phontology:Electronical rdf:type owl:NamedIndividual ,
+                                 phontology:Shutter .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#FallingSoldier
+phontology:FallingSoldier rdf:type owl:NamedIndividual ,
+                                   phontology:Photo ;
+                          phontology:is_realized_by phontology:Robert_Capa ;
+                          rdfs:label "Falling Soldier" ;
+                          <http://www.w3.org/2004/02/skos/core#altLabel> "The Falling Soldier"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Foma35
+phontology:Foma35 rdf:type owl:NamedIndividual ,
+                           phontology:Film ;
+                  rdfs:label "Foma 35"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Fujifilm_TX30
+phontology:Fujifilm_TX30 rdf:type owl:NamedIndividual ,
+                                  phontology:Photocamera ;
+                         phontology:Mirror "false"^^xsd:boolean ;
+                         rdfs:label "Fujifilm TX30"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#India
+phontology:India rdf:type owl:NamedIndividual ,
+                          phontology:Country ;
+                 rdfs:label "India"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Kittens
+phontology:Kittens rdf:type owl:NamedIndividual ,
+                            phontology:Photo ;
+                   phontology:hasPlace phontology:Torino ;
+                   phontology:isRealizedWith phontology:CanonEos200D ;
+                   phontology:photoColorType "Color" ;
+                   rdfs:label "Kittens"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Koda
+phontology:Koda rdf:type owl:NamedIndividual ,
+                         phontology:Photo ;
+                phontology:hasPlace phontology:Torino ;
+                phontology:isRealizedWith phontology:CanonEos200D ;
+                phontology:photoColorType "Color" ;
+                rdfs:label "Koda" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Kodachrome
+phontology:Kodachrome rdf:type owl:NamedIndividual ,
+                               phontology:Film ;
+                      phontology:isPartOfCamera phontology:NikonFM2 ;
+                      rdfs:label "Koda Chrome"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Leica
+phontology:Leica rdf:type owl:NamedIndividual ,
+                          phontology:Brand ;
+                 rdfs:label "Leica" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#LeicaI
+phontology:LeicaI rdf:type owl:NamedIndividual ,
+                           phontology:Photocamera ;
+                  phontology:hasBrand phontology:Leica ;
+                  phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> ;
+                  phontology:hasShutter phontology:Mechanical ;
+                  phontology:hasSupport phontology:Foma35 ;
+                  phontology:Mirror "true"^^xsd:boolean ;
+                  phontology:cameraType "Analogical"^^xsd:string ;
+                  rdfs:label "Leica I"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Martina_Anzolini
+phontology:Martina_Anzolini rdf:type owl:NamedIndividual ,
+                                     phontology:Person ;
+                            PhOntology:hasTookPhoto phontology:Kittens ,
+                                                    phontology:Koda ;
+                            rdfs:label "Martina Anzolini"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Mechanical
+phontology:Mechanical rdf:type owl:NamedIndividual ,
+                               phontology:Shutter .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Moonson
+phontology:Moonson rdf:type owl:NamedIndividual ,
+                            phontology:Reportage ;
+                   rdfs:label "Moonson"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#NikonFM2
+phontology:NikonFM2 rdf:type owl:NamedIndividual ,
+                             phontology:Photocamera ;
+                    phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm> ;
+                    phontology:hasShutter phontology:Mechanical ;
+                    phontology:hasSupport phontology:Kodachrome ;
+                    phontology:cameraType "Analogical"^^xsd:string ;
+                    rdfs:label "Nikon FM 2"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Pakistan
+phontology:Pakistan rdf:type owl:NamedIndividual ,
+                             phontology:Country ;
+                    rdfs:label "Pakistan"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Ragazza_Afgana
+phontology:Ragazza_Afgana rdf:type owl:NamedIndividual ,
+                                   phontology:Photo ;
+                          phontology:hasMainCharacter phontology:Sharbat_Gula ;
+                          phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm> ;
+                          phontology:has_taken_in_country phontology:Pakistan ;
+                          phontology:isPublished phontology:Moonson ;
+                          phontology:isRealizedWith phontology:NikonFM2 ;
+                          rdfs:label "Ragazza Afgana"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Reportage_dal_Fronte
+phontology:Reportage_dal_Fronte rdf:type owl:NamedIndividual ,
+                                         phontology:WarReportage ;
+                                rdfs:label "Reportage dal Fronte"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Robert_Capa
+phontology:Robert_Capa rdf:type owl:NamedIndividual ,
+                                phontology:Person ;
+                       PhOntology:hasTookPhoto phontology:Sperlinga ,
+                                               phontology:The_Soldier_in_The_Surf ;
+                       rdfs:label "Robert Capa" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Sharbat_Gula
+phontology:Sharbat_Gula rdf:type owl:NamedIndividual ,
+                                 phontology:Person ;
+                        rdfs:label "Sharbat Gula"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Sperlinga
+phontology:Sperlinga rdf:type owl:NamedIndividual ,
+                              phontology:Photo ;
+                     phontology:isPublished phontology:Reportage_dal_Fronte ;
+                     phontology:isRealizedWith phontology:LeicaI .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Steve_McCurry
+phontology:Steve_McCurry rdf:type owl:NamedIndividual ,
+                                  phontology:Person ;
+                         PhOntology:hasTookPhoto phontology:Ragazza_Afgana ,
+                                                 phontology:Tailor_carrying_his_sewing_machine ;
+                         rdfs:label "Steve McCurry"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Tailor_carrying_his_sewing_machine
+phontology:Tailor_carrying_his_sewing_machine rdf:type owl:NamedIndividual ,
+                                                       phontology:Photo ;
+                                              phontology:isPublished phontology:Moonson ;
+                                              phontology:isRealizedWith phontology:NikonFM2 ;
+                                              rdfs:label "Tailor carrying his sewing machine"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#The_Soldier_in_The_Surf
+phontology:The_Soldier_in_The_Surf rdf:type owl:NamedIndividual ,
+                                            phontology:Photo ;
+                                   phontology:isPublished phontology:Reportage_dal_Fronte ;
+                                   phontology:isRealizedWith phontology:LeicaI ;
+                                   rdfs:label "The soldier in the surf" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Torino
+phontology:Torino rdf:type owl:NamedIndividual ,
+                           <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ;
+                  rdfs:label "Torino"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#UrLeica
+phontology:UrLeica rdf:type owl:NamedIndividual ,
+                            phontology:Photocamera ;
+                   phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm> ;
+                   phontology:hasShutter phontology:Mechanical ;
+                   rdfs:label "Ur-Leica"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm
+<http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm> rdf:type owl:NamedIndividual ,
+                                                                               phontology:Lens ;
+                                                                      phontology:focalLenght "105"^^xsd:short ;
+                                                                      rdfs:label "105 mm"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm
+<http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm> rdf:type owl:NamedIndividual ,
+                                                                              phontology:Lens ;
+                                                                     rdfs:label "20 mm" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm
+<http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm> rdf:type owl:NamedIndividual ,
+                                                                               phontology:Lens ;
+                                                                      rdfs:label "35 mm"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm
+<http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> rdf:type owl:NamedIndividual ,
+                                                                              phontology:Lens ;
+                                                                     phontology:focalLenght "50"^^xsd:short ;
+                                                                     rdfs:label "50 mm"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Martina_Anzolini
+                        phontology:Robert_Capa
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Martina_Anzolini
+                        phontology:Steve_McCurry
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Ragazza_Afgana
+                        phontology:Tailor_carrying_his_sewing_machine
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Robert_Capa
+                        phontology:Sharbat_Gula
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Robert_Capa
+                        phontology:Steve_McCurry
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Sharbat_Gula
+                        phontology:Steve_McCurry
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm>
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm>
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm>
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm>
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm>
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm>
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm>
+                      )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+phontology:x rdf:type swrl:Variable .
+
+phontology:z rdf:type swrl:Variable .
+
+phontology:p rdf:type swrl:Variable .
+
+phontology:r rdf:type swrl:Variable .
+
+phontology:m rdf:type swrl:Variable .
+
+phontology:bool rdf:type swrl:Variable .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S4"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photocamera ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate phontology:Mirror ;
+                                      swrl:argument1 phontology:x ;
+                                      swrl:argument2 phontology:bool
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                 swrl:builtin swrlb:equal ;
+                                                 swrl:arguments [ rdf:type rdf:List ;
+                                                                  rdf:first phontology:bool ;
+                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                             rdf:first "true"^^xsd:boolean ;
+                                                                             rdf:rest rdf:nil
+                                                                           ]
+                                                                ]
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Reflex ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S3"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photocamera ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate phontology:Mirror ;
+                                      swrl:argument1 phontology:x ;
+                                      swrl:argument2 "false"^^xsd:boolean
+                                    ] ;
+                          rdf:rest rdf:nil
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Mirrorless ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S1"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photocamera ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:ClassAtom ;
+                                      swrl:classPredicate phontology:Film ;
+                                      swrl:argument1 phontology:z
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                                 swrl:propertyPredicate phontology:hasSupport ;
+                                                 swrl:argument1 phontology:x ;
+                                                 swrl:argument2 phontology:z
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                           swrl:propertyPredicate phontology:cameraType ;
+                           swrl:argument1 phontology:x ;
+                           swrl:argument2 "Analogical"^^xsd:string
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment "photograph published into war reportage is a war photo"^^xsd:string ;
+   rdfs:label "S5"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photo ;
+                           swrl:argument1 phontology:p
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                      swrl:propertyPredicate phontology:isPublished ;
+                                      swrl:argument1 phontology:p ;
+                                      swrl:argument2 phontology:r
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:ClassAtom ;
+                                                 swrl:classPredicate phontology:WarReportage ;
+                                                 swrl:argument1 phontology:r
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:WarPhoto ;
+                           swrl:argument1 phontology:p
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S2"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photocamera ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                      swrl:propertyPredicate phontology:hasSupport ;
+                                      swrl:argument1 phontology:x ;
+                                      swrl:argument2 phontology:m
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                                 swrl:propertyPredicate phontology:cameraType ;
+                                                 swrl:argument1 phontology:x ;
+                                                 swrl:argument2 "Digital"^^xsd:string
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:MemoryCard ;
+                           swrl:argument1 phontology:m
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
