@@ -656,7 +656,7 @@ phontology:Contax rdf:type owl:NamedIndividual ,
 phontology:Contax_II rdf:type owl:NamedIndividual ,
                               phontology:Photocamera ;
                      phontology:hasBrand phontology:Contax ;
-                     phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm> ;
+                     phontology:hasLens phontology:FixedLens ;
                      phontology:hasShutter phontology:Mechanical ;
                      phontology:hasSupport phontology:Contax_II ;
                      rdfs:label "Contax II" .
@@ -678,6 +678,7 @@ phontology:Electronical rdf:type owl:NamedIndividual ,
 phontology:FallingSoldier rdf:type owl:NamedIndividual ,
                                    phontology:Photo ;
                           phontology:isPublished phontology:Death_in_Making ;
+                          phontology:isRealizedWith phontology:UrLeica ;
                           phontology:is_realized_by phontology:Robert_Capa ;
                           rdfs:label "Falling Soldier" ;
                           skos:altLabel "The Falling Soldier"@en .
@@ -686,7 +687,8 @@ phontology:FallingSoldier rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#FixedLens
 phontology:FixedLens rdf:type owl:NamedIndividual ,
                               phontology:Lens ;
-                     phontology:focalLenght "35"^^xsd:short .
+                     phontology:focalLenght "35"^^xsd:short ;
+                     rdfs:label "Fixed Lens" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Foma35
