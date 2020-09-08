@@ -435,8 +435,7 @@ phontology:Person rdf:type owl:Class ;
 phontology:Photo rdf:type owl:Class ;
                  rdfs:comment "A representation of a person or scene recorded by a camera"@en ;
                  rdfs:label "Photo"@en ;
-                 owl:equivalentClass "https://schema.org/Photograph" ,
-                                     "https://www.wikidata.org/wiki/Q125191"^^xsd:anyURI ;
+                 owl:equivalentClass <https://www.wikidata.org/wiki/Q125191> ;
                  skos:broader "http://purl.org/dc/dcmitype/Image"^^xsd:anyURI .
 
 
