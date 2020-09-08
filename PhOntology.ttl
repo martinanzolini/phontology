@@ -637,6 +637,7 @@ phontology:Carri_Armati rdf:type owl:NamedIndividual ,
                         phontology:isPublished phontology:Reportage_dal_Fronte ;
                         phontology:isRealizedWith phontology:LeicaI ;
                         phontology:is_member_of phontology:Reportage_dal_Fronte ;
+                        phontology:is_realized_by phontology:Robert_Capa ;
                         phontology:photoColorType "B/W" ;
                         rdfs:label "Carri Armati" .
 
@@ -822,7 +823,12 @@ phontology:Ritratto_a_Colori rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Robert_Capa
 phontology:Robert_Capa rdf:type owl:NamedIndividual ,
                                 phontology:Person ;
-                       PhOntology:hasTookPhoto phontology:Ritratto_a_Colori ,
+                       phontology:hasOwnCamera phontology:Contax_II ,
+                                               phontology:LeicaI ,
+                                               phontology:UrLeica ;
+                       PhOntology:hasTookPhoto phontology:Carri_Armati ,
+                                               phontology:FallingSoldier ,
+                                               phontology:Ritratto_a_Colori ,
                                                phontology:Sperlinga ,
                                                phontology:The_Soldier_in_The_Surf ;
                        rdfs:label "Robert Capa" .
@@ -847,7 +853,8 @@ phontology:Sperlinga rdf:type owl:NamedIndividual ,
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Steve_McCurry
 phontology:Steve_McCurry rdf:type owl:NamedIndividual ,
-                                  phontology:Person ;
+                                  phontology:Person ,
+                                  phontology:Photographer ;
                          phontology:hasOwnCamera phontology:NikonFM2 ;
                          PhOntology:hasTookPhoto phontology:Ragazza_Afgana ,
                                                  phontology:Tailor_carrying_his_sewing_machine ;
