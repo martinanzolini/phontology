@@ -95,6 +95,8 @@ phontology:Contains_public_photo rdf:type owl:ObjectProperty ;
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Is_Contained
 phontology:Is_Contained rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf phontology:is_member_of ;
+                        rdfs:domain phontology:Photo ;
+                        rdfs:range phontology:Album ;
                         rdfs:label "is contained"@en .
 
 
@@ -433,10 +435,11 @@ phontology:Person rdf:type owl:Class ;
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Photo
 phontology:Photo rdf:type owl:Class ;
+                 owl:equivalentClass <https://www.wikidata.org/wiki/Q125191> ;
                  rdfs:comment "A representation of a person or scene recorded by a camera"@en ;
                  rdfs:label "Photo"@en ;
-                 owl:equivalentClass <https://www.wikidata.org/wiki/Q125191> ;
-                 skos:broader "http://purl.org/dc/dcmitype/Image"^^xsd:anyURI .
+                 owl:equivalentClass "https://www.wikidata.org/wiki/Q125191"@en ;
+                 skos:broader "http://purl.org/dc/dcmitype/Image" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Photocamera
@@ -512,7 +515,7 @@ phontology:StandardLens rdf:type owl:Class ;
                                               owl:onProperty phontology:focalLenght ;
                                               owl:someValuesFrom [ rdf:type rdfs:Datatype ;
                                                                    owl:onDatatype xsd:short ;
-                                                                   owl:withRestrictions ( [ xsd:minInclusive "35"^^xsd:short
+                                                                   owl:withRestrictions ( [ xsd:minExclusive "35"^^xsd:short
                                                                                           ]
                                                                                           [ xsd:maxExclusive "50"^^xsd:short
                                                                                           ]
@@ -587,6 +590,12 @@ phontology:WideLens rdf:type owl:Class ;
                                    rdfs:label "Person"@en .
 
 
+###  https://www.wikidata.org/wiki/Q125191
+<https://www.wikidata.org/wiki/Q125191> rdf:type owl:Class ;
+                                        rdfs:isDefinedBy "https://www.wikidata.org/wiki/Q125191"@en ;
+                                        rdfs:label "Photograph"@en .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -607,17 +616,57 @@ phontology:CanonEos200D rdf:type owl:NamedIndividual ,
                         rdfs:label "Canon EOS 200 D"@en .
 
 
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Capa_in_Colors
+phontology:Capa_in_Colors rdf:type owl:NamedIndividual ,
+                                   phontology:Album ;
+                          phontology:hasPhoto phontology:Ritratto_a_Colori ;
+                          rdfs:label "Capa in Colors" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Capucine
+phontology:Capucine rdf:type owl:NamedIndividual ,
+                             phontology:Person ;
+                    phontology:hasCollaboratedWith phontology:Robert_Capa ;
+                    rdfs:label "Capucine" .
+
+
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Carri_Armati
 phontology:Carri_Armati rdf:type owl:NamedIndividual ,
                                  phontology:WarPhoto ;
+                        phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> ;
                         phontology:isPublished phontology:Reportage_dal_Fronte ;
-                        phontology:is_realized_by phontology:LeicaI ;
+                        phontology:isRealizedWith phontology:LeicaI ;
+                        phontology:is_member_of phontology:Reportage_dal_Fronte ;
                         rdfs:label "Carri Armati" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Cats
 phontology:Cats rdf:type owl:NamedIndividual ,
-                         phontology:Album .
+                         phontology:Album ;
+                phontology:hasPhoto phontology:Kittens ,
+                                    phontology:Koda .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Contax
+phontology:Contax rdf:type owl:NamedIndividual ,
+                           phontology:Brand .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Contax_II
+phontology:Contax_II rdf:type owl:NamedIndividual ,
+                              phontology:Photocamera ;
+                     phontology:hasBrand phontology:Contax ;
+                     phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm> ;
+                     phontology:hasShutter phontology:Mechanical ;
+                     phontology:hasSupport phontology:Contax_II ;
+                     rdfs:label "Contax II" .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Death_in_Making
+phontology:Death_in_Making rdf:type owl:NamedIndividual ,
+                                    phontology:Reportage ,
+                                    phontology:WarReportage ;
+                           rdfs:label "Death in Making" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Electronical
@@ -628,22 +677,22 @@ phontology:Electronical rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#FallingSoldier
 phontology:FallingSoldier rdf:type owl:NamedIndividual ,
                                    phontology:Photo ;
+                          phontology:isPublished phontology:Death_in_Making ;
                           phontology:is_realized_by phontology:Robert_Capa ;
                           rdfs:label "Falling Soldier" ;
                           skos:altLabel "The Falling Soldier"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#FixedLens
+phontology:FixedLens rdf:type owl:NamedIndividual ,
+                              phontology:Lens ;
+                     phontology:focalLenght "35"^^xsd:short .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Foma35
 phontology:Foma35 rdf:type owl:NamedIndividual ,
                            phontology:Film ;
                   rdfs:label "Foma 35"@en .
-
-
-###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Fujifilm_TX30
-phontology:Fujifilm_TX30 rdf:type owl:NamedIndividual ,
-                                  phontology:Photocamera ;
-                         phontology:Mirror "false"^^xsd:boolean ;
-                         rdfs:label "Fujifilm TX30"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#India
@@ -656,7 +705,9 @@ phontology:India rdf:type owl:NamedIndividual ,
 phontology:Kittens rdf:type owl:NamedIndividual ,
                             phontology:Photo ;
                    phontology:hasPlace phontology:Torino ;
+                   phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm> ;
                    phontology:isRealizedWith phontology:CanonEos200D ;
+                   phontology:is_realized_by phontology:Martina_Anzolini ;
                    phontology:photoColorType "Color" ;
                    rdfs:label "Kittens"@en .
 
@@ -665,7 +716,9 @@ phontology:Kittens rdf:type owl:NamedIndividual ,
 phontology:Koda rdf:type owl:NamedIndividual ,
                          phontology:Photo ;
                 phontology:hasPlace phontology:Torino ;
+                phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm> ;
                 phontology:isRealizedWith phontology:CanonEos200D ;
+                phontology:is_realized_by phontology:Martina_Anzolini ;
                 phontology:photoColorType "Color" ;
                 rdfs:label "Koda" .
 
@@ -698,6 +751,7 @@ phontology:LeicaI rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Martina_Anzolini
 phontology:Martina_Anzolini rdf:type owl:NamedIndividual ,
                                      phontology:Person ;
+                            phontology:hasOwnCamera phontology:CanonEos200D ;
                             PhOntology:hasTookPhoto phontology:Kittens ,
                                                     phontology:Koda ;
                             rdfs:label "Martina Anzolini"@en .
@@ -710,7 +764,8 @@ phontology:Mechanical rdf:type owl:NamedIndividual ,
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Moonson
 phontology:Moonson rdf:type owl:NamedIndividual ,
-                            phontology:Reportage ;
+                            phontology:Reportage ,
+                            phontology:UrbanReportage ;
                    rdfs:label "Moonson"@en .
 
 
@@ -738,6 +793,7 @@ phontology:Ragazza_Afgana rdf:type owl:NamedIndividual ,
                           phontology:has_taken_in_country phontology:Pakistan ;
                           phontology:isPublished phontology:Moonson ;
                           phontology:isRealizedWith phontology:NikonFM2 ;
+                          phontology:is_realized_by phontology:Steve_McCurry ;
                           rdfs:label "Ragazza Afgana"@en .
 
 
@@ -747,10 +803,22 @@ phontology:Reportage_dal_Fronte rdf:type owl:NamedIndividual ,
                                 rdfs:label "Reportage dal Fronte"@en .
 
 
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Ritratto_a_Colori
+phontology:Ritratto_a_Colori rdf:type owl:NamedIndividual ,
+                                      phontology:Photo ;
+                             phontology:Is_Contained phontology:Capa_in_Colors ;
+                             phontology:hasMainCharacter phontology:Capucine ;
+                             phontology:isRealizedWith phontology:Contax_II ;
+                             phontology:is_realized_by phontology:Robert_Capa ;
+                             phontology:photoColorType "Color" ;
+                             rdfs:label "Ritratto a Colori" .
+
+
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Robert_Capa
 phontology:Robert_Capa rdf:type owl:NamedIndividual ,
                                 phontology:Person ;
-                       PhOntology:hasTookPhoto phontology:Sperlinga ,
+                       PhOntology:hasTookPhoto phontology:Ritratto_a_Colori ,
+                                               phontology:Sperlinga ,
                                                phontology:The_Soldier_in_The_Surf ;
                        rdfs:label "Robert Capa" .
 
@@ -763,14 +831,18 @@ phontology:Sharbat_Gula rdf:type owl:NamedIndividual ,
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Sperlinga
 phontology:Sperlinga rdf:type owl:NamedIndividual ,
-                              phontology:Photo ;
+                              phontology:Photo ,
+                              phontology:WarPhoto ;
+                     phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> ;
                      phontology:isPublished phontology:Reportage_dal_Fronte ;
-                     phontology:isRealizedWith phontology:LeicaI .
+                     phontology:isRealizedWith phontology:LeicaI ;
+                     phontology:is_realized_by phontology:Robert_Capa .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Steve_McCurry
 phontology:Steve_McCurry rdf:type owl:NamedIndividual ,
                                   phontology:Person ;
+                         phontology:hasOwnCamera phontology:NikonFM2 ;
                          PhOntology:hasTookPhoto phontology:Ragazza_Afgana ,
                                                  phontology:Tailor_carrying_his_sewing_machine ;
                          rdfs:label "Steve McCurry"@en .
@@ -779,16 +851,23 @@ phontology:Steve_McCurry rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Tailor_carrying_his_sewing_machine
 phontology:Tailor_carrying_his_sewing_machine rdf:type owl:NamedIndividual ,
                                                        phontology:Photo ;
+                                              phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm> ;
                                               phontology:isPublished phontology:Moonson ;
                                               phontology:isRealizedWith phontology:NikonFM2 ;
+                                              phontology:is_member_of phontology:Moonson ;
+                                              phontology:is_realized_by phontology:Steve_McCurry ;
                                               rdfs:label "Tailor carrying his sewing machine"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#The_Soldier_in_The_Surf
 phontology:The_Soldier_in_The_Surf rdf:type owl:NamedIndividual ,
-                                            phontology:Photo ;
+                                            phontology:Photo ,
+                                            phontology:WarPhoto ;
+                                   phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> ;
                                    phontology:isPublished phontology:Reportage_dal_Fronte ;
                                    phontology:isRealizedWith phontology:LeicaI ;
+                                   phontology:is_member_of phontology:Reportage_dal_Fronte ;
+                                   phontology:is_realized_by phontology:Robert_Capa ;
                                    rdfs:label "The soldier in the surf" .
 
 
@@ -803,31 +882,38 @@ phontology:UrLeica rdf:type owl:NamedIndividual ,
                             phontology:Photocamera ;
                    phontology:hasLens <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm> ;
                    phontology:hasShutter phontology:Mechanical ;
-                   rdfs:label "Ur-Leica"@en .
+                   phontology:Mirror "false"^^xsd:boolean ;
+                   rdfs:label "UrLeica" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm
 <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm> rdf:type owl:NamedIndividual ,
-                                                                               phontology:Lens ;
+                                                                               phontology:Lens ,
+                                                                               phontology:TeleLens ;
                                                                       phontology:focalLenght "105"^^xsd:short ;
                                                                       rdfs:label "105 mm"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm
 <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm> rdf:type owl:NamedIndividual ,
-                                                                              phontology:Lens ;
+                                                                              phontology:Lens ,
+                                                                              phontology:WideLens ;
+                                                                     phontology:focalLenght "20"^^xsd:short ;
                                                                      rdfs:label "20 mm" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm
 <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm> rdf:type owl:NamedIndividual ,
-                                                                               phontology:Lens ;
+                                                                               phontology:Lens ,
+                                                                               phontology:WideLens ;
+                                                                      phontology:focalLenght "35"^^xsd:short ;
                                                                       rdfs:label "35 mm"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm
 <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> rdf:type owl:NamedIndividual ,
-                                                                              phontology:Lens ;
+                                                                              phontology:Lens ,
+                                                                              phontology:TeleLens ;
                                                                      phontology:focalLenght "50"^^xsd:short ;
                                                                      rdfs:label "50 mm"@en .
 
@@ -835,6 +921,76 @@ phontology:UrLeica rdf:type owl:NamedIndividual ,
 #################################################################
 #    General axioms
 #################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Canon
+                        phontology:Contax
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Canon
+                        phontology:Leica
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Contax
+                        phontology:Leica
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Death_in_Making
+                        phontology:Moonson
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Death_in_Making
+                        phontology:Reportage_dal_Fronte
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:FixedLens
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#105mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:FixedLens
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:FixedLens
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#35_mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:FixedLens
+                        <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:LeicaI
+                        phontology:UrLeica
+                      )
+] .
+
 
 [ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( phontology:Martina_Anzolini
@@ -846,6 +1002,13 @@ phontology:UrLeica rdf:type owl:NamedIndividual ,
 [ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( phontology:Martina_Anzolini
                         phontology:Steve_McCurry
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( phontology:Moonson
+                        phontology:Reportage_dal_Fronte
                       )
 ] .
 
@@ -938,72 +1101,6 @@ phontology:bool rdf:type swrl:Variable .
 
 [ swrla:isRuleEnabled "true"^^xsd:boolean ;
    rdfs:comment ""^^xsd:string ;
-   rdfs:label "S4"^^xsd:string ;
-   rdf:type swrl:Imp ;
-   swrl:body [ rdf:type swrl:AtomList ;
-               rdf:first [ rdf:type swrl:ClassAtom ;
-                           swrl:classPredicate phontology:Photocamera ;
-                           swrl:argument1 phontology:x
-                         ] ;
-               rdf:rest [ rdf:type swrl:AtomList ;
-                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
-                                      swrl:propertyPredicate phontology:Mirror ;
-                                      swrl:argument1 phontology:x ;
-                                      swrl:argument2 phontology:bool
-                                    ] ;
-                          rdf:rest [ rdf:type swrl:AtomList ;
-                                     rdf:first [ rdf:type swrl:BuiltinAtom ;
-                                                 swrl:builtin swrlb:equal ;
-                                                 swrl:arguments [ rdf:type rdf:List ;
-                                                                  rdf:first phontology:bool ;
-                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                             rdf:first "true"^^xsd:boolean ;
-                                                                             rdf:rest rdf:nil
-                                                                           ]
-                                                                ]
-                                               ] ;
-                                     rdf:rest rdf:nil
-                                   ]
-                        ]
-             ] ;
-   swrl:head [ rdf:type swrl:AtomList ;
-               rdf:first [ rdf:type swrl:ClassAtom ;
-                           swrl:classPredicate phontology:Reflex ;
-                           swrl:argument1 phontology:x
-                         ] ;
-               rdf:rest rdf:nil
-             ]
- ] .
-
-[ swrla:isRuleEnabled "true"^^xsd:boolean ;
-   rdfs:comment ""^^xsd:string ;
-   rdfs:label "S3"^^xsd:string ;
-   rdf:type swrl:Imp ;
-   swrl:body [ rdf:type swrl:AtomList ;
-               rdf:first [ rdf:type swrl:ClassAtom ;
-                           swrl:classPredicate phontology:Photocamera ;
-                           swrl:argument1 phontology:x
-                         ] ;
-               rdf:rest [ rdf:type swrl:AtomList ;
-                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
-                                      swrl:propertyPredicate phontology:Mirror ;
-                                      swrl:argument1 phontology:x ;
-                                      swrl:argument2 "false"^^xsd:boolean
-                                    ] ;
-                          rdf:rest rdf:nil
-                        ]
-             ] ;
-   swrl:head [ rdf:type swrl:AtomList ;
-               rdf:first [ rdf:type swrl:ClassAtom ;
-                           swrl:classPredicate phontology:Mirrorless ;
-                           swrl:argument1 phontology:x
-                         ] ;
-               rdf:rest rdf:nil
-             ]
- ] .
-
-[ swrla:isRuleEnabled "true"^^xsd:boolean ;
-   rdfs:comment ""^^xsd:string ;
    rdfs:label "S1"^^xsd:string ;
    rdf:type swrl:Imp ;
    swrl:body [ rdf:type swrl:AtomList ;
@@ -1031,6 +1128,39 @@ phontology:bool rdf:type swrl:Variable .
                            swrl:propertyPredicate phontology:cameraType ;
                            swrl:argument1 phontology:x ;
                            swrl:argument2 "Analogical"^^xsd:string
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S6"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photo ;
+                           swrl:argument1 phontology:p
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                      swrl:propertyPredicate phontology:isPublished ;
+                                      swrl:argument1 phontology:p ;
+                                      swrl:argument2 phontology:r
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:ClassAtom ;
+                                                 swrl:classPredicate phontology:UrbanReportage ;
+                                                 swrl:argument1 phontology:r
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:UrbanPhoto ;
+                           swrl:argument1 phontology:p
                          ] ;
                rdf:rest rdf:nil
              ]
@@ -1098,6 +1228,72 @@ phontology:bool rdf:type swrl:Variable .
                rdf:first [ rdf:type swrl:ClassAtom ;
                            swrl:classPredicate phontology:MemoryCard ;
                            swrl:argument1 phontology:m
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S4"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photocamera ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate phontology:Mirror ;
+                                      swrl:argument1 phontology:x ;
+                                      swrl:argument2 phontology:bool
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                 swrl:builtin swrlb:equal ;
+                                                 swrl:arguments [ rdf:type rdf:List ;
+                                                                  rdf:first phontology:bool ;
+                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                             rdf:first "true"^^xsd:boolean ;
+                                                                             rdf:rest rdf:nil
+                                                                           ]
+                                                                ]
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Reflex ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ swrla:isRuleEnabled "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S3"^^xsd:string ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Photocamera ;
+                           swrl:argument1 phontology:x
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate phontology:Mirror ;
+                                      swrl:argument1 phontology:x ;
+                                      swrl:argument2 "false"^^xsd:boolean
+                                    ] ;
+                          rdf:rest rdf:nil
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate phontology:Mirrorless ;
+                           swrl:argument1 phontology:x
                          ] ;
                rdf:rest rdf:nil
              ]
