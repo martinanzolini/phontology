@@ -637,6 +637,7 @@ phontology:Carri_Armati rdf:type owl:NamedIndividual ,
                         phontology:isPublished phontology:Reportage_dal_Fronte ;
                         phontology:isRealizedWith phontology:LeicaI ;
                         phontology:is_member_of phontology:Reportage_dal_Fronte ;
+                        phontology:photoColorType "B/W" ;
                         rdfs:label "Carri Armati" .
 
 
@@ -680,6 +681,7 @@ phontology:FallingSoldier rdf:type owl:NamedIndividual ,
                           phontology:isPublished phontology:Death_in_Making ;
                           phontology:isRealizedWith phontology:UrLeica ;
                           phontology:is_realized_by phontology:Robert_Capa ;
+                          phontology:photoColorType "Sepia" ;
                           rdfs:label "Falling Soldier" ;
                           skos:altLabel "The Falling Soldier"@en .
 
@@ -796,6 +798,7 @@ phontology:Ragazza_Afgana rdf:type owl:NamedIndividual ,
                           phontology:isPublished phontology:Moonson ;
                           phontology:isRealizedWith phontology:NikonFM2 ;
                           phontology:is_realized_by phontology:Steve_McCurry ;
+                          phontology:photoColorType "Color" ;
                           rdfs:label "Ragazza Afgana"@en .
 
 
@@ -838,7 +841,8 @@ phontology:Sperlinga rdf:type owl:NamedIndividual ,
                      phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#50mm> ;
                      phontology:isPublished phontology:Reportage_dal_Fronte ;
                      phontology:isRealizedWith phontology:LeicaI ;
-                     phontology:is_realized_by phontology:Robert_Capa .
+                     phontology:is_realized_by phontology:Robert_Capa ;
+                     phontology:photoColorType "B/W" .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Steve_McCurry
@@ -858,6 +862,7 @@ phontology:Tailor_carrying_his_sewing_machine rdf:type owl:NamedIndividual ,
                                               phontology:isRealizedWith phontology:NikonFM2 ;
                                               phontology:is_member_of phontology:Moonson ;
                                               phontology:is_realized_by phontology:Steve_McCurry ;
+                                              phontology:photoColorType "Color" ;
                                               rdfs:label "Tailor carrying his sewing machine"@en .
 
 
@@ -870,6 +875,7 @@ phontology:The_Soldier_in_The_Surf rdf:type owl:NamedIndividual ,
                                    phontology:isRealizedWith phontology:LeicaI ;
                                    phontology:is_member_of phontology:Reportage_dal_Fronte ;
                                    phontology:is_realized_by phontology:Robert_Capa ;
+                                   phontology:photoColorType "B/W" ;
                                    rdfs:label "The soldier in the surf" .
 
 
