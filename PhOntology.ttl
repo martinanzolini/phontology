@@ -81,6 +81,7 @@ skos:broader rdf:type owl:AnnotationProperty .
                                                                                        owl:TransitiveProperty ;
                                                                               rdfs:domain <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
                                                                               rdfs:range owl:Thing ;
+                                                                              rdfs:comment "member of collection"@en ;
                                                                               rdfs:isDefinedBy "http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl"@en ;
                                                                               rdfs:label "has member"@en .
 
@@ -90,6 +91,7 @@ phontology:Contains_public_photo rdf:type owl:ObjectProperty ;
                                  rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
                                  rdfs:domain phontology:Reportage ;
                                  rdfs:range phontology:Photo ;
+                                 rdfs:comment "Reportage which contains photo"@en ;
                                  rdfs:label "contains public photo"@en .
 
 
@@ -98,6 +100,7 @@ phontology:Is_Contained rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf phontology:is_member_of ;
                         rdfs:domain phontology:Photo ;
                         rdfs:range phontology:Album ;
+                        rdfs:comment "Photo that is into an album"@en ;
                         rdfs:label "is contained"@en .
 
 
@@ -121,6 +124,8 @@ phontology:hasCollaboratedWith rdf:type owl:ObjectProperty ,
                                         owl:TransitiveProperty ;
                                rdfs:domain phontology:Person ;
                                rdfs:range phontology:Person ;
+                               rdfs:comment "people who collaborate with people"@en ,
+                                            "persone che collaborano con persone"@it ;
                                rdfs:label "has collaborated with"@en .
 
 
@@ -130,6 +135,7 @@ phontology:hasLens rdf:type owl:ObjectProperty ;
                    rdf:type owl:FunctionalProperty ;
                    rdfs:domain phontology:Photocamera ;
                    rdfs:range phontology:Lens ;
+                   rdfs:comment "lens of photocamera"@en ;
                    rdfs:label "has lens"@en .
 
 
@@ -138,6 +144,8 @@ phontology:hasMainCharacter rdf:type owl:ObjectProperty ,
                                      owl:FunctionalProperty ;
                             rdfs:domain phontology:Photo ;
                             rdfs:range phontology:Person ;
+                            rdfs:comment "person who is main character of a photo"@en ,
+                                         "persona protagonista, soggeto di una foto"@it ;
                             rdfs:label "has main character"@en .
 
 
@@ -148,6 +156,7 @@ phontology:hasOwnCamera rdf:type owl:ObjectProperty ;
                         owl:propertyChainAxiom ( PhOntology:hasTookPhoto
                                                  phontology:isRealizedWith
                                                ) ;
+                        rdfs:comment "Own photocamera of a person"@en ;
                         rdfs:label "has own camera"@en .
 
 
@@ -157,6 +166,7 @@ phontology:hasPartOfCamera rdf:type owl:ObjectProperty ;
                            rdf:type owl:TransitiveProperty ;
                            rdfs:domain phontology:Photocamera ;
                            rdfs:range phontology:PhotocameraComponent ;
+                           rdfs:comment "component of photocamera"@en ;
                            rdfs:label "has part of camera"@en .
 
 
@@ -165,6 +175,7 @@ phontology:hasPhoto rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
                     rdfs:domain phontology:Album ;
                     rdfs:range phontology:Photo ;
+                    rdfs:comment "Album which contains photo"@en ;
                     rdfs:label "has photo"@en .
 
 
@@ -174,7 +185,8 @@ phontology:hasPlace rdf:type owl:ObjectProperty ;
                     rdf:type owl:TransitiveProperty ;
                     rdfs:domain phontology:Photo ;
                     rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ;
-                    rdfs:comment "luogo in cui accade un avvenimento"@it ;
+                    rdfs:comment "has place when something happen"@en ,
+                                 "luogo in cui accade un avvenimento"@it ;
                     rdfs:label "has place"@en .
 
 
@@ -183,6 +195,7 @@ phontology:hasRealizationDetail rdf:type owl:ObjectProperty ;
                                 owl:propertyChainAxiom ( phontology:isRealizedWith
                                                          phontology:hasLens
                                                        ) ;
+                                rdfs:comment "photo detail from photocamera"@en ;
                                 rdfs:label "has realization details"@en .
 
 
@@ -192,6 +205,7 @@ phontology:hasShutter rdf:type owl:ObjectProperty ;
                       rdf:type owl:FunctionalProperty ;
                       rdfs:domain phontology:Photocamera ;
                       rdfs:range phontology:Shutter ;
+                      rdfs:comment "shutter of photocamera"@en ;
                       rdfs:label "has shutter"@en .
 
 
@@ -201,6 +215,7 @@ phontology:hasSupport rdf:type owl:ObjectProperty ;
                       rdf:type owl:FunctionalProperty ;
                       rdfs:domain phontology:Photocamera ;
                       rdfs:range phontology:SupportType ;
+                      rdfs:comment "support type of photocamera"@en ;
                       rdfs:label "has support"@en .
 
 
@@ -209,7 +224,8 @@ phontology:has_taken_in_city rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf phontology:hasPlace ;
                              rdfs:domain phontology:Photo ;
                              rdfs:range phontology:City ;
-                             rdfs:comment "città in cui viene realizzata una foto"@it ;
+                             rdfs:comment "città in cui viene realizzata una foto"@it ,
+                                          "city where photo is realized"@en ;
                              rdfs:label "has taken in city"@en .
 
 
@@ -219,7 +235,8 @@ phontology:has_taken_in_country rdf:type owl:ObjectProperty ;
                                 rdf:type owl:TransitiveProperty ;
                                 rdfs:domain phontology:Photo ;
                                 rdfs:range phontology:Country ;
-                                rdfs:comment "stato in cui viene realizzata una foto"@it ;
+                                rdfs:comment "country where photo is realized"@en ,
+                                             "stato in cui viene realizzata una foto"@it ;
                                 rdfs:label "has taken in country"@en .
 
 
@@ -228,6 +245,7 @@ phontology:isPartOfCamera rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#isPartOf> ;
                           rdfs:domain phontology:PhotocameraComponent ;
                           rdfs:range phontology:Photocamera ;
+                          rdfs:comment "component part of photocamera"@en ;
                           rdfs:label "is part of photocamera"@en .
 
 
@@ -237,6 +255,7 @@ phontology:isPublished rdf:type owl:ObjectProperty ;
                        rdf:type owl:TransitiveProperty ;
                        rdfs:domain phontology:Photo ;
                        rdfs:range phontology:Reportage ;
+                       rdfs:comment "Kid of photo into a reportage"@en ;
                        rdfs:label "is published"@en .
 
 
@@ -245,6 +264,7 @@ phontology:isRealizedWith rdf:type owl:ObjectProperty ,
                                    owl:FunctionalProperty ;
                           rdfs:domain phontology:Photo ;
                           rdfs:range phontology:Photocamera ;
+                          rdfs:comment "camera which ralized some photo"@en ;
                           rdfs:label "is realized with"@en .
 
 
@@ -252,6 +272,7 @@ phontology:isRealizedWith rdf:type owl:ObjectProperty ,
 phontology:is_member_of rdf:type owl:ObjectProperty ;
                         rdfs:domain owl:Thing ;
                         rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
+                        rdfs:comment "is member of something"@en ;
                         rdfs:label "is member of"@en .
 
 
@@ -261,6 +282,7 @@ phontology:is_realized_by rdf:type owl:ObjectProperty ;
                           rdf:type owl:FunctionalProperty ;
                           rdfs:domain phontology:Photo ;
                           rdfs:range phontology:Person ;
+                          rdfs:comment "action act by someone for doing a photo"@en ;
                           rdfs:label "is realized by"@en .
 
 
@@ -269,6 +291,7 @@ PhOntology:hasTookPhoto rdf:type owl:ObjectProperty ,
                                  owl:AsymmetricProperty ;
                         rdfs:domain phontology:Person ;
                         rdfs:range phontology:Photo ;
+                        rdfs:comment "realization of photography"@en ;
                         rdfs:label "has took photo"@en .
 
 
