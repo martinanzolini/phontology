@@ -21,7 +21,7 @@
                                                                  owl:imports <http://www.ontologydesignpatterns.org/cp/owl/partof.owl> ,
                                                                              <http://www.ontologydesignpatterns.org/cp/owl/place.owl> ;
                                                                  dc:creator "Martina Anzolini"@en ;
-                                                                 dc:date "Luglio 2020"@en ;
+                                                                 dc:date "2020-07-01"@en ;
                                                                  dc:description "Ontology that describes a partial world of photography"@en ;
                                                                  dc:title "Photo Ontology"@en ;
                                                                  vann:preferredNamespacePrefix "pho"@en ;
@@ -86,21 +86,18 @@ skos:broader rdf:type owl:AnnotationProperty .
                                                                               rdfs:label "has member"@en .
 
 
-###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Contains_public_photo
-phontology:Contains_public_photo rdf:type owl:ObjectProperty ;
-                                 rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
-                                 rdfs:domain phontology:Reportage ;
-                                 rdfs:range phontology:Photo ;
-                                 rdfs:comment "Reportage which contains photo"@en ;
-                                 rdfs:label "contains public photo"@en .
+###  http://www.ontologydesignpatterns.org/cp/owl/partof.owl#isPartOf
+<http://www.ontologydesignpatterns.org/cp/owl/partof.owl#isPartOf> rdfs:comment "relazione transitiva che esprime la relazione di appartenenza"@it .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Is_Contained
 phontology:Is_Contained rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf phontology:is_member_of ;
+                        owl:inverseOf phontology:hasPhoto ;
                         rdfs:domain phontology:Photo ;
-                        rdfs:range phontology:Album ;
-                        rdfs:comment "Photo that is into an album"@en ;
+                        rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
+                        rdfs:comment "Photo that is into a collection"@en ,
+                                     "foto contenuta in una collezione"@it ;
                         rdfs:label "is contained"@en .
 
 
@@ -120,8 +117,7 @@ phontology:hasBrand rdf:type owl:ObjectProperty ,
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasCollaboratedWith
 phontology:hasCollaboratedWith rdf:type owl:ObjectProperty ,
-                                        owl:SymmetricProperty ,
-                                        owl:TransitiveProperty ;
+                                        owl:SymmetricProperty ;
                                rdfs:domain phontology:Person ;
                                rdfs:range phontology:Person ;
                                rdfs:comment "people who collaborate with people"@en ,
@@ -135,7 +131,8 @@ phontology:hasLens rdf:type owl:ObjectProperty ;
                    rdf:type owl:FunctionalProperty ;
                    rdfs:domain phontology:Photocamera ;
                    rdfs:range phontology:Lens ;
-                   rdfs:comment "lens of photocamera"@en ;
+                   rdfs:comment "lens of photocamera"@en ,
+                                "obiettivo che è parte di una fotocamera"@it ;
                    rdfs:label "has lens"@en .
 
 
@@ -156,7 +153,8 @@ phontology:hasOwnCamera rdf:type owl:ObjectProperty ;
                         owl:propertyChainAxiom ( PhOntology:hasTookPhoto
                                                  phontology:isRealizedWith
                                                ) ;
-                        rdfs:comment "Own photocamera of a person"@en ;
+                        rdfs:comment "own photocamera of a person"@en ,
+                                     "persona che possiede una fotocamera, informazione ottenuta attraverso gli scatti che la persona ha effettuato"@it ;
                         rdfs:label "has own camera"@en .
 
 
@@ -166,16 +164,18 @@ phontology:hasPartOfCamera rdf:type owl:ObjectProperty ;
                            rdf:type owl:TransitiveProperty ;
                            rdfs:domain phontology:Photocamera ;
                            rdfs:range phontology:PhotocameraComponent ;
-                           rdfs:comment "component of photocamera"@en ;
+                           rdfs:comment "component of photocamera"@en ,
+                                        "componente che è parte di una fotocamera"@it ;
                            rdfs:label "has part of camera"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasPhoto
 phontology:hasPhoto rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
-                    rdfs:domain phontology:Album ;
+                    rdfs:domain <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
                     rdfs:range phontology:Photo ;
-                    rdfs:comment "Album which contains photo"@en ;
+                    rdfs:comment "collection that is composed by some photo"@en ,
+                                 "collezione che è composta da foto"@it ;
                     rdfs:label "has photo"@en .
 
 
@@ -185,9 +185,21 @@ phontology:hasPlace rdf:type owl:ObjectProperty ;
                     rdf:type owl:TransitiveProperty ;
                     rdfs:domain phontology:Photo ;
                     rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/place.owl#Place> ;
-                    rdfs:comment "has place when something happen"@en ,
-                                 "luogo in cui accade un avvenimento"@it ;
+                    rdfs:comment "luogo in cui accade un avvenimento"@it ,
+                                 "place when something happen"@en ;
                     rdfs:label "has place"@en .
+
+
+###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasPublicatePhoto
+phontology:hasPublicatePhoto rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
+                             owl:inverseOf phontology:isPublished ;
+                             rdf:type owl:TransitiveProperty ;
+                             rdfs:domain phontology:Reportage ;
+                             rdfs:range phontology:Photo ;
+                             rdfs:comment "A kind of reportage which contains some photo"@en ,
+                                          "reportage che contiene la pubblicazione di alcune foto"@it ;
+                             rdfs:label "has publicate photo"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#hasRealizationDetail
@@ -195,7 +207,8 @@ phontology:hasRealizationDetail rdf:type owl:ObjectProperty ;
                                 owl:propertyChainAxiom ( phontology:isRealizedWith
                                                          phontology:hasLens
                                                        ) ;
-                                rdfs:comment "photo detail from photocamera"@en ;
+                                rdfs:comment "dettagli della foto ottenuti dalla fotocamera"@it ,
+                                             "photo detail from photocamera"@en ;
                                 rdfs:label "has realization details"@en .
 
 
@@ -205,7 +218,8 @@ phontology:hasShutter rdf:type owl:ObjectProperty ;
                       rdf:type owl:FunctionalProperty ;
                       rdfs:domain phontology:Photocamera ;
                       rdfs:range phontology:Shutter ;
-                      rdfs:comment "shutter of photocamera"@en ;
+                      rdfs:comment "shutter of photocamera"@en ,
+                                   "tipo di otturattore (meccanico o elettronico) appartenente ad una fotocamera"@it ;
                       rdfs:label "has shutter"@en .
 
 
@@ -215,13 +229,15 @@ phontology:hasSupport rdf:type owl:ObjectProperty ;
                       rdf:type owl:FunctionalProperty ;
                       rdfs:domain phontology:Photocamera ;
                       rdfs:range phontology:SupportType ;
-                      rdfs:comment "support type of photocamera"@en ;
+                      rdfs:comment "support type of photocamera"@en ,
+                                   "tipolgia di supporto che è parte di una fotocamera"@it ;
                       rdfs:label "has support"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#has_taken_in_city
 phontology:has_taken_in_city rdf:type owl:ObjectProperty ;
-                             rdfs:subPropertyOf phontology:hasPlace ;
+                             rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#hasLocation> ;
+                             rdf:type owl:TransitiveProperty ;
                              rdfs:domain phontology:Photo ;
                              rdfs:range phontology:City ;
                              rdfs:comment "città in cui viene realizzata una foto"@it ,
@@ -231,7 +247,7 @@ phontology:has_taken_in_city rdf:type owl:ObjectProperty ;
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#has_taken_in_country
 phontology:has_taken_in_country rdf:type owl:ObjectProperty ;
-                                rdfs:subPropertyOf phontology:hasPlace ;
+                                rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/place.owl#hasLocation> ;
                                 rdf:type owl:TransitiveProperty ;
                                 rdfs:domain phontology:Photo ;
                                 rdfs:range phontology:Country ;
@@ -243,9 +259,11 @@ phontology:has_taken_in_country rdf:type owl:ObjectProperty ;
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#isPartOfCamera
 phontology:isPartOfCamera rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/partof.owl#isPartOf> ;
+                          rdf:type owl:TransitiveProperty ;
                           rdfs:domain phontology:PhotocameraComponent ;
                           rdfs:range phontology:Photocamera ;
-                          rdfs:comment "component part of photocamera"@en ;
+                          rdfs:comment "component part of photocamera"@en ,
+                                       "componente che è parte di una fotocamera"@it ;
                           rdfs:label "is part of photocamera"@en .
 
 
@@ -255,7 +273,8 @@ phontology:isPublished rdf:type owl:ObjectProperty ;
                        rdf:type owl:TransitiveProperty ;
                        rdfs:domain phontology:Photo ;
                        rdfs:range phontology:Reportage ;
-                       rdfs:comment "Kid of photo into a reportage"@en ;
+                       rdfs:comment "foto pubblicata in un reportage"@it ,
+                                    "photo that has pubblicate into a reportage"@en ;
                        rdfs:label "is published"@en .
 
 
@@ -264,12 +283,14 @@ phontology:isRealizedWith rdf:type owl:ObjectProperty ,
                                    owl:FunctionalProperty ;
                           rdfs:domain phontology:Photo ;
                           rdfs:range phontology:Photocamera ;
-                          rdfs:comment "camera which ralized some photo"@en ;
+                          rdfs:comment "camera which ralized some photo"@en ,
+                                       "fotocamera con cui viene realizzata qualche foto"@it ;
                           rdfs:label "is realized with"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#is_member_of
-phontology:is_member_of rdf:type owl:ObjectProperty ;
+phontology:is_member_of rdf:type owl:ObjectProperty ,
+                                 owl:TransitiveProperty ;
                         rdfs:domain owl:Thing ;
                         rdfs:range <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
                         rdfs:comment "is member of something"@en ;
@@ -282,7 +303,8 @@ phontology:is_realized_by rdf:type owl:ObjectProperty ;
                           rdf:type owl:FunctionalProperty ;
                           rdfs:domain phontology:Photo ;
                           rdfs:range phontology:Person ;
-                          rdfs:comment "action act by someone for doing a photo"@en ;
+                          rdfs:comment "action act by someone for doing a photo"@en ,
+                                       "azione compiuta da qualcuno per realizzare una foto"@it ;
                           rdfs:label "is realized by"@en .
 
 
@@ -291,7 +313,8 @@ PhOntology:hasTookPhoto rdf:type owl:ObjectProperty ,
                                  owl:AsymmetricProperty ;
                         rdfs:domain phontology:Person ;
                         rdfs:range phontology:Photo ;
-                        rdfs:comment "realization of photography"@en ;
+                        rdfs:comment "person who has realization some kind of photography"@en ,
+                                     "persona che ha realizzato qualche tipo di foto"@it ;
                         rdfs:label "has took photo"@en .
 
 
@@ -303,15 +326,17 @@ PhOntology:hasTookPhoto rdf:type owl:ObjectProperty ,
 phontology:Mirror rdf:type owl:DatatypeProperty ;
                   rdfs:domain phontology:Photocamera ;
                   rdfs:range xsd:boolean ;
-                  rdfs:comment "Mirror inside Photocamera"@en ;
+                  rdfs:comment "Mirror inside Photocamera"@en ,
+                               "Specchio"@it ;
                   rdfs:label "Mirror"@en .
 
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#PhotoDate
 phontology:PhotoDate rdf:type owl:DatatypeProperty ;
                      rdfs:domain phontology:Photo ;
-                     rdfs:range xsd:dateTime ;
-                     rdfs:comment "Date of Photo, espress in Years"@en ;
+                     rdfs:range xsd:short ;
+                     rdfs:comment "Data Foto, espresso in Anno"@it ,
+                                  "Date of Photo, espress in Years"@en ;
                      rdfs:label "Photo Date"@en .
 
 
@@ -327,7 +352,8 @@ phontology:cameraType rdf:type owl:DatatypeProperty ;
                                                         ]
                                              ]
                                  ] ;
-                      rdfs:comment "Type of Photocamera"@en ;
+                      rdfs:comment "Tipo di fotocamera"@it ,
+                                   "Type of Photocamera"@en ;
                       rdfs:label "Camera Type"@en .
 
 
@@ -335,7 +361,8 @@ phontology:cameraType rdf:type owl:DatatypeProperty ;
 phontology:focalLenght rdf:type owl:DatatypeProperty ;
                        rdfs:domain phontology:Lens ;
                        rdfs:range xsd:short ;
-                       rdfs:comment "Focal Lenght of Lens"@en ;
+                       rdfs:comment "Focal Lenght of Lens"@en ,
+                                    "Lunghezza focale"@it ;
                        rdfs:label "Focal Lenght"@en .
 
 
@@ -357,7 +384,8 @@ phontology:photoColorType rdf:type owl:DatatypeProperty ;
                                                             ]
                                                  ]
                                      ] ;
-                          rdfs:comment "Color about photograph"@en ;
+                          rdfs:comment "Color about photograph"@en ,
+                                       "Tipologia Colorazione Foto"@it ;
                           rdfs:label "Photo Color Type"@en .
 
 
@@ -365,7 +393,8 @@ phontology:photoColorType rdf:type owl:DatatypeProperty ;
 PhOntology:photoTitle rdf:type owl:DatatypeProperty ;
                       rdfs:domain phontology:Photo ;
                       rdfs:range xsd:string ;
-                      rdfs:comment "Title of photograph"@en ;
+                      rdfs:comment "Title of photograph"@en ,
+                                   "Titolo della Foto"@it ;
                       rdfs:label "Photo Title" .
 
 
@@ -391,12 +420,12 @@ PhOntology:photoTitle rdf:type owl:DatatypeProperty ;
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Album
 phontology:Album rdf:type owl:Class ;
-                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ,
-                                 [ rdf:type owl:Restriction ;
-                                   owl:onProperty phontology:hasPhoto ;
-                                   owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-                                   owl:onClass phontology:Photo
-                                 ] ;
+                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                       owl:onProperty phontology:hasPhoto ;
+                                       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                       owl:onClass phontology:Photo
+                                     ] ;
+                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
                  rdfs:comment "A collection of personal photographs or other significative images that are arranged for viewing"@en ,
                               "Raccoglie fotografie riprese in circostanze varie e in momenti particolarm. significativi della vita"@it ;
                  rdfs:label "Album"@en .
@@ -688,7 +717,7 @@ phontology:CanonEos200D rdf:type owl:NamedIndividual ,
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Capa_in_Colors
 phontology:Capa_in_Colors rdf:type owl:NamedIndividual ,
-                                   phontology:Album ;
+                                   <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
                           phontology:hasPhoto phontology:Ritratto_a_Colori ;
                           rdfs:comment "Album of photo in colors"@en ;
                           rdfs:label "Capa in Colors" .
@@ -718,7 +747,7 @@ phontology:Carri_Armati rdf:type owl:NamedIndividual ,
 
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Cats
 phontology:Cats rdf:type owl:NamedIndividual ,
-                         phontology:Album ;
+                         <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> ;
                 phontology:hasPhoto phontology:Kittens ,
                                     phontology:Koda ;
                 rdfs:comment "Album about cats"@en ;
@@ -738,7 +767,7 @@ phontology:Contax_II rdf:type owl:NamedIndividual ,
                      phontology:hasBrand phontology:Contax ;
                      phontology:hasLens phontology:FixedLens ;
                      phontology:hasShutter phontology:Mechanical ;
-                     phontology:hasSupport phontology:Contax_II ;
+                     phontology:hasSupport phontology:Kodachrome ;
                      rdfs:comment "Contax camera"@en ;
                      rdfs:label "Contax II" .
 
@@ -810,8 +839,8 @@ phontology:Italia rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/martina/ontologies/2020/PhOntology#Kittens
 phontology:Kittens rdf:type owl:NamedIndividual ,
                             phontology:Photo ;
-                   phontology:hasPlace phontology:Torino ;
                    phontology:hasRealizationDetail <http://www.semanticweb.org/martina/ontologies/2020/PhOntology#20mm> ;
+                   phontology:has_taken_in_city phontology:Torino ;
                    phontology:has_taken_in_country phontology:Italia ;
                    phontology:isRealizedWith phontology:CanonEos200D ;
                    phontology:is_realized_by phontology:Martina_Anzolini ;
